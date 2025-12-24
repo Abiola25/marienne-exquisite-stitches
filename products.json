@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Hand‑stitched Jalabia with golden embroidery, folded with care for premium delivery.",
+    "image": "images/packed1.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Elegant Jalabia crafted from silky fabric, presented in a refined package.",
+    "image": "images/packed2.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 3,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Classic Saudi‑style Jalabia with subtle detailing, folded neatly for gifting.",
+    "image": "images/packed3.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 4,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Luxury Jalabia in pristine white, packaged for effortless elegance.",
+    "image": "images/packed4.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 5,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Premium Jalabia with fine embroidery, folded for a regal presentation.",
+    "image": "images/packed5.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 6,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Richly textured Jalabia, carefully packaged to preserve its luxury feel.",
+    "image": "images/packed6.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 7,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Stylish Jalabia with modern tailoring, elegantly folded for delivery.",
+    "image": "images/packed7.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 8,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Refined Jalabia with soft fabric finish, packaged for a premium touch.",
+    "image": "images/packed8.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 9,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Traditional Jalabia with timeless appeal, folded neatly for gifting.",
+    "image": "images/packed9.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 10,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Elegant Jalabia in rich tones, packaged for effortless sophistication.",
+    "image": "images/packed10.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 11,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Luxury Jalabia with intricate detailing, folded for a refined look.",
+    "image": "images/packed11.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 12,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Premium Jalabia with smooth finish, elegantly packaged for delivery.",
+    "image": "images/packed12.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 13,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Handcrafted Jalabia with subtle accents, folded for a luxury experience.",
+    "image": "images/packed13.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 14,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Elegant Jalabia in soft hues, packaged for a premium presentation.",
+    "image": "images/packed14.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 15,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Classic Jalabia with refined stitching, folded neatly for delivery.",
+    "image": "images/packed15.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 16,
+    "name": "Packed Jalabia",
+    "price": 45000,
+    "description": "Luxury Jalabia with modern elegance, packaged for a regal touch.",
+    "image": "images/packed16.jpg",
+    "category": "Packed",
+    "stock": 10
+  },
+  {
+    "id": 17,
+    "name": "Adult Jalabia",
+    "price": 45000,
+    "description": "Premium adult Jalabia with flowing design, tailored for elegance and comfort.",
+    "image": "images/adult1.jpg",
+    "category": "Adult",
+    "stock": 5
+  },
+  {
+    "id": 18,
+    "name": "Adult Jalabia",
+    "price": 45000,
+    "description": "Elegant adult Jalabia with refined embroidery, crafted for timeless style.",
+    "image": "images/adult2.jpg",
+    "category": "Adult",
+    "stock": 5
+  },
+  {
+    "id": 19,
+    "name": "Adult Jalabia",
+    "price": 45000,
+    "description": "Luxury adult Jalabia with soft fabric and regal detailing.",
+    "image": "images/adult3.jpg",
+    "category": "Adult",
+    "stock": 5
+  },
+  {
+    "id": 20,
+    "name": "Kids Jalabia",
+    "price": 25000,
+    "description": "Exquisite kids Jalabia, playful yet elegant, designed for comfort and charm.",
+    "image": "images/kid.jpg",
+    "category": "Kids",
+    "stock": 3
+  }
+]

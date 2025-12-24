@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel - Marienne Exquisite Stitches</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    color: #f5f5f5;
+    padding: 20px;
+}
+
+/* PIN Section */
+#pin-section {
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 0 25px rgba(212,175,55,0.4);
+}
+#pin-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #d4af37;
+    margin-bottom: 20px;
+}
+#pin-input {
+    padding: 12px;
+    width: 70%;
+    border-radius: 8px;
+    border: 1px solid #d4af37;
+    background: #111;
+    color: #d4af37;
+}
+#pin-btn {
+    padding: 12px 18px;
+    margin-left: 8px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #d4af37, #b8860b);
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+}
+#pin-btn:hover {
+    background: linear-gradient(90deg, #ffd700, #d4af37);
+}
+#pin-msg {
+    margin-top: 15px;
+    color: #ff4c4c;
+}
+
+/* Admin Content */
+#admin-content {
+    display:none;
+}
+h1 {
+    text-align:center;
+    font-family: 'Cormorant Garamond', serif;
+    color:#d4af37;
+    margin-bottom:30px;
+    text-shadow:0 0 20px rgba(212,175,55,0.6);
+}
+.top-actions {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+.back-btn {
+    background:#111;
+    color:#d4af37;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:8px;
+    border:1px solid #d4af37;
+    transition:0.3s;
+}
+.back-btn:hover {
+    background:#d4af37;
+    color:#000;
+}
+.clear-btn {
+    background:#b71c1c;
+    color:white;
+    padding:10px 16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.clear-btn:hover {
+    background:#ff4c4c;
+}
+
+/* Orders Table */
+table {
+    width:100%;
+    border-collapse:collapse;
+    background:rgba(255,255,255,0.05);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 0 20px rgba(212,175,55,0.3);
+}
+th,td {
+    padding:12px;
+    border-bottom:1px solid rgba(212,175,55,0.2);
+    text-align:left;
+}
+th {
+    background:#111;
+    color:#d4af37;
+    font-family:'Cormorant Garamond', serif;
+}
+tr:hover {
+    background:rgba(212,175,55,0.1);
+}
+small {
+    color:#aaa;
+}
+
+/* Footer */
+footer {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(212,175,55,0.3);
+  padding: 30px;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 30px;
+  color: #f5f5f5;
+}
+footer h3 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #d4af37;
+  margin-bottom: 12px;
+}
+footer a {
+  color: #ffd700;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+.whatsapp-float:hover {
+  transform: scale(1.05);
+}
+</style>
+</head>
+<body>
+
+<div id="pin-section">
+<h2>Enter Admin PIN</h2>
+<input type="password" id="pin-input" placeholder="Enter PIN">
+<button id="pin-btn">Submit</button>
+<p id="pin-msg"></p>
+</div>
+
+<div id="admin-content">
+<h1>Admin Panel – Marienne Exquisite Stitches</h1>
+<div class="top-actions">
+<a href="index.html" class="back-btn">⬅ Back to Store</a>
+<button class="clear-btn" onclick="clearOrders()">Clear All Orders</button>
+</div>
+
+<section>
+<h2 style="color:#ffd700;">Customer Orders</h2>
+<table id="orders-table">
+<thead>
+<tr>
+<th>Date</th>
+<th>Items Ordered</th>
+<th>Total (₦)</th>
+<th>Shipment</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p><small>Orders are saved locally (offline mode).</small></p>
+</section>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-section">
+    <h3>Connect With Us</h3>
+    <p>Instagram: 
+      <a href="https://instagram.com/royalintschools2000" target="_blank">@royalintschools2000</a>
+    </p>
+    <p>Email: <a href="mailto:bibasule61@gmail.com">bibasule61@gmail.com</a></p>
+    <p>Phone/WhatsApp: +2348034045437 / +2348056228857</p>
+  </div>
+
+  <div class="footer-section">
+    <h3>Payment Details</h3>
+    <p><strong>Bank Name:</strong> GT Bank</p>
+    <p><strong>Account Name:</strong> Habiba A. Suleiman</p>
+    <p><strong>Account Number:</strong> 0052447920</p>
+  </div>
+
+  <div class="footer-section portfolio">
+    <p>Curated by <strong>RoyalTechSolutions</strong></p>
+    <a href="https://royaltechsolutions.netlify.app" target="_blank">Explore Portfolio</a>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/2348034045437" class="whatsapp-float" target="_blank">
+  💬 Chat on WhatsApp
+</a>
+
+<script>
+const ADMIN_PIN = "1234";
+
+document.getElementById("pin-btn").addEventListener("click",()=>{
+    const pin=document.getElementById("pin-input").value;
+    if(pin===ADMIN_PIN){
+        document.getElementById("pin-section").style.display="none";
+        document.getElementById("admin-content").style.display="block";
+        loadOrders();
+    } else {
+        document.getElementById("pin-msg").innerText="Access Denied. Wrong PIN!";
+    }
+});
+
+function loadOrders(){
+    const orders=JSON.parse(localStorage.getItem("orders") || "[]");
+    const products=JSON.parse(localStorage.getItem("products") || "[]");
+    const tbody=document.querySelector("#orders-table tbody");
+    tbody.innerHTML="";
+    if(orders.length===0){
+        tbody.innerHTML="<tr><td colspan='4'>No orders yet.</td></tr>";
+        return;
+    }
+    orders.forEach(order=>{
+        let itemsText="",total=0;
+        order.items.forEach(it=>{
+            const product=products.find(p=>p.id===it.id);
+            if(product){
+                const subtotal=product.price*it.qty;
+                total+=subtotal;
+                itemsText+=`${product.name} × ${it.qty} = ₦${subtotal}<br>`;
+            }
+        });
+        const tr=document.createElement("tr");
+        tr.innerHTML=`<td>${order.date}</td><td>${itemsText}</td><td>₦${total}</td><td>${order.shipment}</td>`;
+        tbody.appendChild(tr);
+    });
+}
+
+function clearOrders(){
+    if(confirm("Are you sure you want to clear ALL orders?")){
+        localStorage.removeItem("orders");
+        loadOrders();
+    }
+}
+</script>
+
+</body>
+</html>
+

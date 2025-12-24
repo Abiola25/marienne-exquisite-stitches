@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Marienne Exquisite Stitches</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    color: #f5f5f5;
+    margin: 0;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin: 40px 0;
+}
+header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: #d4af37;
+    text-shadow: 0 0 25px rgba(212,175,55,0.6);
+    margin: 0;
+}
+header p {
+    font-size: 20px;
+    color: #ccc;
+    margin-top: 8px;
+}
+
+/* Fixed UI */
+#cart-count, #admin-link, #view-cart {
+    position: fixed;
+    right: 20px;
+    background: rgba(212,175,55,0.9);
+    color: #000;
+    padding: 10px 14px;
+    border-radius: 25px;
+    font-weight: bold;
+    z-index: 100;
+    box-shadow: 0 0 15px rgba(212,175,55,0.6);
+}
+#cart-count { top: 20px; }
+#admin-link { top: 70px; background:#111; color:#d4af37; border:1px solid #d4af37; }
+#view-cart { top: 120px; background:#000; color:#d4af37; border:1px solid #d4af37; }
+
+/* Filters */
+.filters {
+    max-width: 700px;
+    margin: 30px auto;
+    display: flex;
+    gap: 12px;
+}
+.filters input, .filters select {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #d4af37;
+    background: #111;
+    color: #d4af37;
+}
+
+/* Products Grid */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+.card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 25px rgba(212,175,55,0.5);
+}
+.card img {
+    width: 100%;
+    height: 280px;
+    object-fit: contain;   /* fixed for Kids images */
+    background-color: #111;
+    border-radius: 12px;
+    padding: 8px;
+}
+.card h3 {
+    margin: 12px 0 6px 0;
+    font-size: 22px;
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+}
+.card p {
+    font-size: 14px;
+    color: #ccc;
+    margin: 0 0 10px 0;
+}
+.price {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: linear-gradient(90deg, #d4af37, #b8860b);
+    color: #000;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+button:hover {
+    background: linear-gradient(90deg, #ffd700, #d4af37);
+}
+
+/* Footer */
+footer {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(212,175,55,0.3);
+  padding: 30px;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 30px;
+  color: #f5f5f5;
+}
+footer h3 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #d4af37;
+  margin-bottom: 12px;
+}
+footer a {
+  color: #ffd700;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+.footer-section.portfolio {
+  text-align:center;
+  grid-column:1/-1;
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+.whatsapp-float:hover {
+  transform: scale(1.05);
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Marienne Exquisite Stitches</h1>
+<p>Copa Cabana Estate, Abuja</p>
+</header>
+
+<div id="cart-count">Cart: 0</div>
+<a id="admin-link" href="admin.html">Admin</a>
+<a id="view-cart" href="cart.html">View Cart</a>
+
+<div class="filters">
+<input id="searchInput" placeholder="Search luxury pieces..." onkeyup="applyFilters()">
+<select id="categoryFilter" onchange="applyFilters()">
+<option value="all">All Collections</option>
+<option value="Packed">Packed</option>
+<option value="Adult">Adult</option>
+<option value="Kids">Kids</option>
+</select>
+</div>
+
+<div class="products" id="products"></div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-section">
+    <h3>Connect With Us</h3>
+    <p>Instagram: 
+      <a href="https://instagram.com/royalintschools2000" target="_blank">@royalintschools2000</a>
+    </p>
+    <p>Email: <a href="mailto:bibasule61@gmail.com">bibasule61@gmail.com</a></p>
+    <p>Phone/WhatsApp: +2348034045437 / +2348056228857</p>
+  </div>
+
+  <div class="footer-section">
+    <h3>Payment Details</h3>
+    <p><strong>Bank Name:</strong> GT Bank</p>
+    <p><strong>Account Name:</strong> Habiba A. Suleiman</p>
+    <p><strong>Account Number:</strong> 0052447920</p>
+  </div>
+
+  <div class="footer-section portfolio">
+    <p>© 2025 <strong>RoyalTechSolutions</strong> | Crafted with excellence</p>
+    <a href="https://royaltechsolutions.netlify.app" target="_blank">Visit Portfolio</a>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/2348034045437" class="whatsapp-float" target="_blank">
+  💬 Chat on WhatsApp
+</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let allProducts = [];
+
+function updateCartCount(){
+    const totalItems = cart.reduce((s,i)=>s+i.qty,0);
+    const totalValue = cart.reduce((s,i)=>{
+        const product = allProducts.find(p=>p.id===i.id);
+        return s + (product ? product.price * i.qty : 0);
+    },0);
+    document.getElementById("cart-count").innerText =
+    `Cart: ${totalItems} | ₦${totalValue}`;
+}
+// Load products
+async function loadProducts(){
+    const res = await fetch('products.json');
+    allProducts = await res.json();
+    localStorage.setItem("products", JSON.stringify(allProducts));
+    renderProducts(allProducts);
+}
+
+function renderProducts(list){
+    const box = document.getElementById("products");
+    box.innerHTML = "";
+    list.forEach(p=>{
+        box.innerHTML += `
+<div class="card">
+  <img src="${p.image}" alt="${p.name}">
+  <h3>${p.name}</h3>
+  <p>${p.description}</p>
+  <div class="price">₦${p.price}</div>
+  <button onclick="addToCart(${p.id})">Add to Cart</button>
+</div>`;
+    });
+}
+
+function applyFilters(){
+    const text = document.getElementById("searchInput").value.toLowerCase();
+    const cat = document.getElementById("categoryFilter").value;
+    renderProducts(allProducts.filter(p=>{
+        return (
+            (p.name.toLowerCase().includes(text) || p.description.toLowerCase().includes(text))
+            && (cat==="all" || p.category===cat)
+        );
+    }));
+}
+
+function addToCart(id){
+    const product = allProducts.find(p=>p.id===id);
+    const item = cart.find(i=>i.id===id);
+    if(item){
+        if(item.qty < product.stock){
+            item.qty++;
+        } else {
+            alert("Only " + product.stock + " left in stock.");
+        }
+    } else {
+        cart.push({id, qty:1});
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+}
+
+updateCartCount();
+loadProducts();
+</script>
+
+</body>
+</html>
+
