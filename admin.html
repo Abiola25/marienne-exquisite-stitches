@@ -71,6 +71,8 @@ h1 {
     display:flex;
     justify-content:space-between;
     margin-bottom:20px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 .back-btn {
     background:#111;
@@ -96,6 +98,34 @@ h1 {
 }
 .clear-btn:hover {
     background:#ff4c4c;
+}
+.download-btn {
+    background: linear-gradient(90deg, #d4af37, #b8860b);
+    color: #000;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.download-btn:hover {
+    background: linear-gradient(90deg, #ffd700, #d4af37);
+    transform: scale(1.05);
+}
+.print-btn {
+    background: linear-gradient(90deg, #25D366, #128C7E);
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.print-btn:hover {
+    background: linear-gradient(90deg, #34D058, #25D366);
+    transform: scale(1.05);
 }
 
 /* Orders Table */
@@ -182,6 +212,8 @@ footer a:hover {
 <div class="top-actions">
 <a href="index.html" class="back-btn">⬅ Back to Store</a>
 <button class="clear-btn" onclick="clearOrders()">Clear All Orders</button>
+<button class="download-btn" onclick="downloadOrders()">⬇ Download Orders</button>
+<button class="print-btn" onclick="printOrders()">🖨 Print Orders</button>
 </div>
 
 <section>
@@ -225,7 +257,6 @@ footer a:hover {
     <a href="https://royaltechsolutions.netlify.app" target="_blank">Explore Portfolio</a>
   </div>
 </footer>
-
 <!-- Floating WhatsApp Button -->
 <a href="https://wa.me/2348034045437" class="whatsapp-float" target="_blank">
   💬 Chat on WhatsApp
@@ -256,19 +287,26 @@ function loadOrders(){
     }
     orders.forEach(order=>{
         let itemsText="",total=0;
-        order.items.forEach(it=>{
+        order.items.forEach((it,index)=>{
             const product=products.find(p=>p.id===it.id);
             if(product){
                 const subtotal=product.price*it.qty;
                 total+=subtotal;
-                itemsText+=`${it.qty} × ${product.name} (₦${product.price} each) → ₦${subtotal}<br>`;
+                itemsText+=`${index+1}) ${it.qty} × ${product.name} (₦${product.price} each) → ₦${subtotal}<br>`;
             }
         });
         const tr=document.createElement("tr");
         tr.innerHTML=`
           <td>${order.date}</td>
           <td>${order.customer || "N/A"}</td>
-          <td>${itemsText}</td>
+          <td>
+            <div style="line-height:1.6;">
+              🧾 <strong>Order Summary</strong><br>
+              ${itemsText}
+              <hr style="border:0;border-top:1px solid rgba(212,175,55,0.3);margin:6px 0;">
+              💰 <strong>Total:</strong> ₦${total}
+            </div>
+          </td>
           <td>₦${total}</td>
           <td>${order.shipment || "N/A"}</td>
         `;
@@ -282,4 +320,69 @@ function clearOrders(){
         loadOrders();
     }
 }
+
+function downloadOrders(){
+    const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    const products = JSON.parse(localStorage.getItem("products") || "[]");
+
+    if(orders.length === 0){
+        alert("No orders to download.");
+        return;
+    }
+
+    let csv = "Date,Customer,Items Ordered,Total,Shipment\n";
+
+    orders.forEach(order=>{
+        let itemsText = "";
+        let total = 0;
+        order.items.forEach(it=>{
+            const product = products.find(p=>p.id===it.id);
+            if(product){
+                const subtotal = product.price * it.qty;
+                total += subtotal;
+                itemsText += `${it.qty} × ${product.name} (₦${product.price} each) → ₦${subtotal}; `;
+            }
+        });
+        csv += `"${order.date}","${order.customer || "N/A"}","${itemsText}","₦${total}","${order.shipment || "N/A"}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "orders.csv";
+    link.click();
+}
+
+function printOrders(){
+    const ordersTable = document.getElementById("orders-table").outerHTML;
+    const win = window.open("", "", "width=900,height=600");
+    win.document.write(`
+        <html>
+        <head>
+          <title>Orders - Marienne Exquisite Stitches</title>
+          <style>
+            body { font-family: 'Montserrat', sans-serif; padding: 20px; }
+            h2 { font-family: 'Cormorant Garamond', serif; color: #d4af37; }
+            table { width:100%; border-collapse:collapse; margin-top:20px; }
+            th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+            th { background:#f5f5f5; color:#333; }
+          </style>
+        </head>
+        <body>
+          <h2>Orders – Marienne Exquisite Stitches</h2>
+          ${ordersTable}
+          <p style="margin-top:20px;font-size:14px;">
+            Bank: GT Bank | Account Name: Habiba A. Suleiman | Account Number: 0052447920<br>
+            Contact: +2348034045437 / +2348056228857 | Email: bibasule61@gmail.com
+          </p>
+        </body>
+        </html>
+    `);
+    win.document.close();
+    win.print();
+}
 </script>
+
+</body>
+</html>
+

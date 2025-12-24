@@ -117,18 +117,27 @@ function renderCart(){
 }
 
 function sendOrderToWhatsApp(){
-    let message = "🛍️ *Order Summary*\n";
+    let message = "🛍️ *Marienne Exquisite Stitches*\n";
+    message += "━━━━━━━━━━━━━━━━━━\n";
+    message += `📅 Date: ${new Date().toLocaleDateString()}\n`;
+    message += `👤 Customer: ${localStorage.getItem("customerName") || "N/A"}\n`;
+    message += `🚚 Delivery: ${localStorage.getItem("deliveryMethod") || "N/A"}\n\n`;
+
+    message += "🧾 *Order Summary*\n";
     let total = 0;
-    cart.forEach(item=>{
-        const product = products.find(p=>p.id===item.id);
+    cart.forEach((item, index) => {
+        const product = products.find(p => p.id === item.id);
         if(product){
             const lineTotal = product.price * item.qty;
             total += lineTotal;
-            message += `- ${item.qty} × ${product.name} (₦${product.price} each)\n`;
+            message += `${index+1}) ${product.name} — ${item.qty} × ₦${product.price} = ₦${lineTotal}\n`;
         }
     });
-    message += `\n*Total:* ₦${total}\n`;
-    message += `\nThank you for shopping with Marienne Exquisite Stitches!`;
+
+    message += "\n━━━━━━━━━━━━━━━━━━\n";
+    message += `💰 *Total:* ₦${total}\n`;
+    message += "━━━━━━━━━━━━━━━━━━\n\n";
+    message += "✨ Thank you for shopping with us!\nWe’ll confirm your order shortly.";
 
     const phone = "2348034045437"; // your WhatsApp number
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
