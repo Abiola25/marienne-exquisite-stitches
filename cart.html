@@ -13,239 +13,136 @@ body {
     margin: 0;
     padding: 20px;
 }
-
-/* Header */
-h2 {
+header {
     text-align: center;
+    margin: 30px 0;
+}
+header h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
+    font-size: 48px;
+    font-weight: 700;
     color: #d4af37;
     text-shadow: 0 0 20px rgba(212,175,55,0.6);
+    margin: 0;
 }
-
-/* Back Button */
-a.back-btn {
-    display:inline-block;
-    margin-bottom:20px;
-    color:#d4af37;
-    text-decoration:none;
-    font-weight:bold;
-    border:1px solid #d4af37;
-    padding:8px 14px;
-    border-radius:8px;
-    transition:0.3s;
+.cart-items {
+    max-width: 800px;
+    margin: 0 auto;
 }
-a.back-btn:hover {
-    background:#d4af37;
-    color:#000;
-}
-
-/* Cart Items */
 .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:12px;
-    border:1px solid rgba(212,175,55,0.3);
-    box-shadow:0 0 15px rgba(212,175,55,0.3);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
 }
-.item strong {
-    font-family: 'Cormorant Garamond', serif;
+.item h3 {
+    margin: 0;
     font-size: 20px;
-    color: #ffd700;
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
 }
-
-/* Buttons */
+.item p {
+    margin: 0;
+    color: #ccc;
+}
+.total {
+    text-align: right;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffd700;
+    margin-top: 20px;
+}
 button {
-    padding:12px;
-    width:100%;
+    padding: 12px 18px;
+    border: none;
     background: linear-gradient(90deg, #d4af37, #b8860b);
-    color:#000;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    margin-top:8px;
+    color: #000;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
     transition: background 0.3s ease;
 }
 button:hover {
     background: linear-gradient(90deg, #ffd700, #d4af37);
 }
-
-/* Order Section */
-#order-section {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
-    padding:20px;
-    border-radius:12px;
-    margin-top:30px;
-    border:1px solid rgba(212,175,55,0.3);
-}
-select {
-    padding:12px;
-    width:100%;
-    border-radius:10px;
-    border:1px solid #d4af37;
-    background:#111;
-    color:#d4af37;
-    margin-top:10px;
-}
-
-/* Footer */
-footer {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(212,175,55,0.3);
-  padding: 30px;
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 30px;
-  color: #f5f5f5;
-}
-footer h3 {
-  font-family: 'Cormorant Garamond', serif;
-  color: #d4af37;
-  margin-bottom: 12px;
-}
-footer a {
-  color: #ffd700;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Floating WhatsApp Button */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 30px;
-  font-weight: bold;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
-}
-.whatsapp-float:hover {
-  transform: scale(1.05);
+.actions {
+    text-align: center;
+    margin-top: 30px;
 }
 </style>
 </head>
 <body>
 
-<h2>Your Luxury Cart</h2>
-<a href="index.html" class="back-btn">⬅ Back to Store</a>
-<div id="cart-items"></div>
+<header>
+  <h1>Your Cart</h1>
+</header>
 
-<div id="order-section">
-<label>
-    Shipment Method:<br>
-    <select id="shipment">
-        <option value="">-- Select --</option>
-        <option value="Pickup">Pickup</option>
-        <option value="Delivery">Delivery</option>
-    </select>
-</label>
-<button onclick="orderWhatsApp()">Order via WhatsApp</button>
-<button onclick="clearCart()" style="background:#b71c1c;color:#fff;">Clear Cart</button>
+<div class="cart-items" id="cartItems"></div>
+<div class="total" id="cartTotal"></div>
+
+<div class="actions">
+  <button onclick="sendOrderToWhatsApp()">Send Order via WhatsApp</button>
+  <button onclick="clearCart()">Clear Cart</button>
+  <a href="index.html"><button>Continue Shopping</button></a>
 </div>
 
-<!-- Footer -->
-<footer>
-  <div class="footer-section">
-    <h3>Connect With Us</h3>
-    <p>Instagram: 
-      <a href="https://instagram.com/royalintschools2000" target="_blank">@royalintschools2000</a>
-    </p>
-    <p>Email: <a href="mailto:bibasule61@gmail.com">bibasule61@gmail.com</a></p>
-    <p>Phone/WhatsApp: +2348034045437 / +2348056228857</p>
-  </div>
-
-  <div class="footer-section">
-    <h3>Payment Details</h3>
-    <p><strong>Bank Name:</strong> GT Bank</p>
-    <p><strong>Account Name:</strong> Habiba A. Suleiman</p>
-    <p><strong>Account Number:</strong> 0052447920</p>
-  </div>
-
-  <div class="footer-section portfolio">
-    <p>Curated by <strong>RoyalTechSolutions</strong></p>
-    <a href="https://royaltechsolutions.netlify.app" target="_blank">Explore Portfolio</a>
-  </div>
-</footer>
-
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/2348034045437" class="whatsapp-float" target="_blank">
-  💬 Chat on WhatsApp
-</a>
-
 <script>
-const STORE = {
-    whatsapp: "2348034045437",
-    name: "Marienne Exquisite Stitches",
-    address: "Copa Cabana Estate, Abuja"
-};
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
-let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-const container = document.getElementById("cart-items");
-let productsList = [];
-
-async function loadCart() {
-    const res = await fetch('products.json');
-    productsList = await res.json();
-    container.innerHTML = "";
-
-    if(cart.length === 0){
-        container.innerHTML = "<p>Your cart is empty.</p>";
-        return;
-    }
-
+function renderCart(){
+    const box = document.getElementById("cartItems");
+    box.innerHTML = "";
+    let total = 0;
     cart.forEach(item=>{
-        const product = productsList.find(p=>p.id===item.id);
-        if(!product) return;
-        const subtotal = product.price * item.qty;
-        container.innerHTML += `
+        const product = products.find(p=>p.id===item.id);
+        if(product){
+            const lineTotal = product.price * item.qty;
+            total += lineTotal;
+            box.innerHTML += `
 <div class="item">
-<strong>${product.name}</strong><br>
-₦${product.price} × ${item.qty} = ₦${subtotal}<br>
-<button onclick="removeItem(${item.id})">Remove</button>
+  <div>
+    <h3>${product.name}</h3>
+    <p>₦${product.price} × ${item.qty}</p>
+  </div>
+  <div>₦${lineTotal}</div>
 </div>`;
+        }
     });
+    document.getElementById("cartTotal").innerText = "Total: ₦" + total;
 }
 
-function removeItem(id){
-    cart = cart.filter(item=>item.id!==id);
-    localStorage.setItem("cart",JSON.stringify(cart));
-    loadCart();
+function sendOrderToWhatsApp(){
+    let message = "🛍️ *Order Summary*\n";
+    let total = 0;
+    cart.forEach(item=>{
+        const product = products.find(p=>p.id===item.id);
+        if(product){
+            const lineTotal = product.price * item.qty;
+            total += lineTotal;
+            message += `- ${item.qty} × ${product.name} (₦${product.price} each)\n`;
+        }
+    });
+    message += `\n*Total:* ₦${total}\n`;
+    message += `\nThank you for shopping with Marienne Exquisite Stitches!`;
+
+    const phone = "2348034045437"; // your WhatsApp number
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
 }
 
 function clearCart(){
     localStorage.removeItem("cart");
-    cart=[];
-    loadCart();
+    cart = [];
+    renderCart();
 }
 
-function orderWhatsApp(){
-    const shipment = document.getElementById("shipment").value || "Not selected";
-    let message = `Hello, I want to order from ${STORE.name}:%0A%0A`;
-    cart.forEach(item=>{
-        const product = productsList.find(p=>p.id===item.id);
-        if(product) message += `• ${product.name} × ${item.qty} = ₦${product.price*item.qty}%0A`;
-    });
-    message += `%0ATotal: ₦${cart.reduce((s,i)=>s+productsList.find(p=>p.id===i.id).price*i.qty,0)}%0A`;
-    message += `%0AShipment Method: ${shipment}`;
-    message += `%0APickup Address: ${STORE.address}`;
-
-    window.open(`https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
-    alert("Order sent via WhatsApp!");
-    clearCart();
-}
-
-loadCart();
+renderCart();
 </script>
+
 </body>
 </html>

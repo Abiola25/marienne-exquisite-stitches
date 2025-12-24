@@ -111,6 +111,7 @@ th,td {
     padding:12px;
     border-bottom:1px solid rgba(212,175,55,0.2);
     text-align:left;
+    vertical-align:top;
 }
 th {
     background:#111;
@@ -189,6 +190,7 @@ footer a:hover {
 <thead>
 <tr>
 <th>Date</th>
+<th>Customer</th>
 <th>Items Ordered</th>
 <th>Total (₦)</th>
 <th>Shipment</th>
@@ -249,7 +251,7 @@ function loadOrders(){
     const tbody=document.querySelector("#orders-table tbody");
     tbody.innerHTML="";
     if(orders.length===0){
-        tbody.innerHTML="<tr><td colspan='4'>No orders yet.</td></tr>";
+        tbody.innerHTML="<tr><td colspan='5'>No orders yet.</td></tr>";
         return;
     }
     orders.forEach(order=>{
@@ -259,11 +261,17 @@ function loadOrders(){
             if(product){
                 const subtotal=product.price*it.qty;
                 total+=subtotal;
-                itemsText+=`${product.name} × ${it.qty} = ₦${subtotal}<br>`;
+                itemsText+=`${it.qty} × ${product.name} (₦${product.price} each) → ₦${subtotal}<br>`;
             }
         });
         const tr=document.createElement("tr");
-        tr.innerHTML=`<td>${order.date}</td><td>${itemsText}</td><td>₦${total}</td><td>${order.shipment}</td>`;
+        tr.innerHTML=`
+          <td>${order.date}</td>
+          <td>${order.customer || "N/A"}</td>
+          <td>${itemsText}</td>
+          <td>₦${total}</td>
+          <td>${order.shipment || "N/A"}</td>
+        `;
         tbody.appendChild(tr);
     });
 }
@@ -275,7 +283,3 @@ function clearOrders(){
     }
 }
 </script>
-
-</body>
-</html>
-
